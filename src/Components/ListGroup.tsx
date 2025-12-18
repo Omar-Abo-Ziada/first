@@ -1,5 +1,5 @@
 import { Fragment } from "react/jsx-runtime";
-import type { MouseEvent } from "react";
+import { useState, type MouseEvent } from "react";
 
 function ListGroup() {
   let items = [
@@ -31,7 +31,18 @@ function ListGroup() {
 
   //   items.map((item) => <li className="list-group-item">{item}</li>);
 
-  let selectedIndex = 0;
+  // wont be updated on re-render because its a normal variable
+  // has to be a state variable
+  // let selectedIndex = 0;
+
+  // // useState hook
+  // const arr = useState(-1);
+  // arr[0]; // current state value
+  // arr[1]; // state update function
+
+  // and each component has its own state
+  const [selectedIndex, setSelectedIndexState] = useState(0);
+  const [name, setName] = useState("Omar"); // u can use this hook to define multiple state variables
 
   return (
     // can't have multiple sibling elements (multiple returns ) ,, need to wrap them
@@ -50,7 +61,8 @@ function ListGroup() {
                 : "list-group-item"
             }
             // onClick={(event) => console.log(item, index, event)}
-            onClick={handleClick}
+            // onClick={handleClick}
+            onClick={() => setSelectedIndexState(index)}
           >
             {item}
           </li>
